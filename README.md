@@ -14,5 +14,5 @@
     - Google Data Studio / Metabase - Visualisation
 
 ## Todo
-- Architecture and Workflow walkthrough
 - Understanding the Dataset so as to define an endgoal
+- Architecture and Workflow walkthrough
