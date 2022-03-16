@@ -13,6 +13,20 @@
     - DBT - Transformation
     - Google Data Studio / Metabase - Visualisation
 
+## About the Dataset
+Github Archive is a project to record the public Github timeline, archive it, and make it accessible for further analysis.
+
+## Proposed End-goal Questions
+- What month and day of the week is Github most active?
+- How did corona virus affect developer activity?
+- What are the most active repositories each year grouped by event
+- Most popular organisation
+- ... 
+
 ## Todo
-- Understanding the Dataset so as to define an endgoal
 - Architecture and Workflow walkthrough
+- Setting up Infrastructure
+
+## Notable issues
+- Compressing json files
+- Airflow Setup
