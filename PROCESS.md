@@ -20,4 +20,16 @@
     gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
     ```
 
-    
+### Terraform
+- I want to create GCS, BigQuery and Dataproc (maybe later sha)
+- We need to edit the permissions in our service account
+    - Storage Admin, Storage Object Admin, BigQuery Admin, DataProc Administrator
+- Enable this APIs for your project
+    - https://console.cloud.google.com/apis/library/iam.googleapis.com
+    - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
+- I'm using version 1.1.7 in my `.terraform-version` file. Change this value if you're using another version. Check `terraform -v`
+- cd into terraform directory
+- run `terraform init`
+- `terrafrom plan` - an overview of what will hapen
+- `terraform apply` - this would perform the tasks
+> If you're in a new session, export he google application credentials again
