@@ -35,7 +35,11 @@ GHArchive -->  GCS --> Spark/DataProc --> BigQuery --> Data Studio
 
 ## Todo
 - Architecture and Workflow walkthrough
-- Setting up Infrastructure
+- Setting up Infrastructure on GCP
+- Ingest into GCS
+- Spark
+- BigQuery
+- Data Studio
 
 ## Notable issues
 - Compressing json files
