@@ -47,3 +47,7 @@
 - Run the DAGS
 
 ### Verbose Steps
+- cd into airflow directory
+- Run `docker-compose build`
+- Run `docker-compose up airflow-init`
+- Run `docker-compose up`
