@@ -33,3 +33,17 @@
 - `terrafrom plan` - an overview of what will hapen
 - `terraform apply` - this would perform the tasks
 > If you're in a new session, export he google application credentials again
+
+## Ingest data into GCS
+- The goal is to ingest data into the GCS bucket using Airflow
+- Airflow tasks
+    - Download the dataset
+    - Transfer it to GCS
+    - Delete the dataset
+
+###  Basic Steps
+- Set up Airflow (the light version)
+- Create the DAGS
+- Run the DAGS
+
+### Verbose Steps
