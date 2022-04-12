@@ -53,6 +53,14 @@
 - Run `docker-compose up`
 
 ## Airflow notes
-- What happened on 12th September 2019
+- What happened on 12th September 2019 from 8am
 - Something occured at 8am that day.. there is no more record.. that broke the pipeline since I downloaded by day and not hours
 - curl compresses the result together. wget downloads by hour
+- No recorded data for 2020-08-21 from 9am
+- No recorded data for 2020-08-22 at all
+8GB RAM would have been enough for this project 
+
+# Data processing
+- The files I have on GCS are terabytes
+- I am officially going to use DataProc
+- But I want to test Apache Spark again by watching those videos by Alexey
