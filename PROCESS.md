@@ -33,3 +33,26 @@
 - `terrafrom plan` - an overview of what will hapen
 - `terraform apply` - this would perform the tasks
 > If you're in a new session, export he google application credentials again
+
+## Ingest data into GCS
+- The goal is to ingest data into the GCS bucket using Airflow
+- Airflow tasks
+    - Download the dataset
+    - Transfer it to GCS
+    - Delete the dataset
+
+###  Basic Steps
+- Set up Airflow (the light version)
+- Create the DAGS
+- Run the DAGS
+
+### Verbose Steps
+- cd into airflow directory
+- Run `docker-compose build`
+- Run `docker-compose up airflow-init`
+- Run `docker-compose up`
+
+## Airflow notes
+- What happened on 12th September 2019
+- Something occured at 8am that day.. there is no more record.. that broke the pipeline since I downloaded by day and not hours
+- curl compresses the result together. wget downloads by hour
