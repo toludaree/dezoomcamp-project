@@ -64,3 +64,7 @@
 - The files I have on GCS are terabytes
 - I am officially going to use DataProc
 - But I want to test Apache Spark again by watching those videos by Alexey
+
+### Goals
+- Set up Spark on VM
+- Refresh knowledge of Spark and understand the dataset better
