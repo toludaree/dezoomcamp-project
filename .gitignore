@@ -5,3 +5,4 @@ terraform.tfstate.backup
 venv/
 logs/
 plugins/
+__pycache__
