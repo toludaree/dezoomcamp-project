@@ -86,6 +86,7 @@ with DAG(
             --region={REGION}
             --jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar
         {PYSPARK_JOB}
+        --
             --input_file=gs://gharchive_bucket_endless-context-344913/{GCS_PATH_TEMPLATE}
             --general_activity={DATASET_NAME}.general_activity
             --active_users={DATASET_NAME}.active_users

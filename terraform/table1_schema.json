@@ -1,0 +1,86 @@
+[
+  {
+    "name": "created_at",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "user",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "avatar_url",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "display_login",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "gravatar_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "login",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "url",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "repo",
+    "type": "RECORD",
+    "mode": "NULLABLE",
+    "fields": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      },
+      {
+        "name": "url",
+        "type": "STRING",
+        "mode": "NULLABLE"
+      }
+    ]
+  },
+  {
+    "name": "day",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "hour",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "weekday",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
