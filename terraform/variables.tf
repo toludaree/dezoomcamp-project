@@ -1,5 +1,6 @@
 locals {
   gcs_bucket_name = "gharchive_bucket"
+  bq_dataset_name = "gharchive_dataset"
 }
 
 variable "project" {

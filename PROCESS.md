@@ -68,3 +68,11 @@
 ### Goals
 - Set up Spark on VM
 - Refresh knowledge of Spark and understand the dataset better
+
+### Issues
+- The schema inferred by spark.read.json tries to account for every key-value pair and they are different with the event type. It created a struct type that had many deep levels. I used MapType for now in the forces schema. Lets see how it goes
+- I don't really understand the payload part. I'll try not to work with it at all in creating my dashboard to avoid complications
+- When I tested with 2019-08-30-0, the json gzipped file is 25MB, On loading into a spark df, enforcing a schema, repartitioning(24), the file is 44MB
+
+### Testing
+- I want to connect to my GCS to my Spark cluster, work with 2019/01. run my business logic and pudh my results back to GCS.
