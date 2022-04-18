@@ -56,7 +56,10 @@ x-airflow-common:
     GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/google_credentials.json
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/google_credentials.json'
     GCP_PROJECT_ID: 'endless-context-344913'
+    GCP_REGION: 'europe-west6'
     GCP_GCS_BUCKET: 'gharchive_bucket_endless-context-344913'
+    GCP_DATAPROC_CLUSTER_NAME: 'gharchive-cluster'
+    GCP_BIGQUERY_DATASET_NAME: 'gharchive_dataset'
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs

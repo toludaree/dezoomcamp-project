@@ -76,3 +76,9 @@
 
 ### Testing
 - I want to connect to my GCS to my Spark cluster, work with 2019/01. run my business logic and pudh my results back to GCS.
+- I have finished with the logic of how my processing would be
+
+## Restructuring
+### Outline
+- I'm ingesting GH Archive data daily. I'll start from the beginning of this month..
+- GH Archive --> GCS --> DataProc --> BigQuery --> Google Data Studio
