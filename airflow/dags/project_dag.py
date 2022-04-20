@@ -53,11 +53,7 @@ default_args = {
 }
 with DAG(
     dag_id="gharchive-dag",
-    description="""\
-    Ingest Github Archive Data into Google Cloud Storage.
-    Process data with DataProc.
-    Write results to BigQuery.
-    """,
+    description="Pipeline for Data Engineering Zoomcamp Project",
     default_args=default_args,
     schedule_interval="0 8 * * *",
     start_date=datetime(2022, 4, 1),
@@ -86,7 +82,7 @@ with DAG(
 
     processing_task = DataProcPySparkOperator(
         task_id="batch_processing_with_dataproc",
-        job_name="pyspark_job",
+        job_name="pyspark_job_{{ execution_date.strftime('%Y-%m-%d') }}",
         cluster_name=f"{CLUSTER_NAME}",
         dataproc_jars=["gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar"],
         gcp_conn_id="google_cloud_default",
