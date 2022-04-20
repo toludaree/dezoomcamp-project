@@ -3,6 +3,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.contrib.operators.dataproc_operator import DataProcPySparkOperator
 from google.cloud import storage
 
 AIRFLOW_HOME = os.environ.get("AIRFLOW_HOME", "/opt/airflow/")
@@ -51,11 +52,16 @@ default_args = {
     "retries": 1,
 }
 with DAG(
-    dag_id="project_dag",
-    description="My project DAG",
+    dag_id="gharchive-dag",
+    description="""\
+    Ingest Github Archive Data into Google Cloud Storage.
+    Process data with DataProc.
+    Write results to BigQuery.
+    """,
     default_args=default_args,
     schedule_interval="0 8 * * *",
     start_date=datetime(2022, 4, 1),
+    max_active_runs=1
 ) as dag:
 
     download_task = BashOperator(
@@ -78,19 +84,19 @@ with DAG(
         bash_command=f"rm {OUTPUT_FILE_TEMPLATE}"
     )
 
-    processing_task = BashOperator(
+    processing_task = DataProcPySparkOperator(
         task_id="batch_processing_with_dataproc",
-        bash_command=f"""
-        gcloud dataproc jobs submit pyspark
-            --cluster={CLUSTER_NAME}
-            --region={REGION}
-            --jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar
-        {PYSPARK_JOB}
-        --
-            --input_file=gs://gharchive_bucket_endless-context-344913/{GCS_PATH_TEMPLATE}
-            --general_activity={DATASET_NAME}.general_activity
-            --active_users={DATASET_NAME}.active_users
-        """
+        job_name="pyspark_job",
+        cluster_name=f"{CLUSTER_NAME}",
+        dataproc_jars=["gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar"],
+        gcp_conn_id="google_cloud_default",
+        region=f"{REGION}",
+        main="gs://gharchive_bucket_endless-context-344913/dataproc/spark_job.py",
+        arguments = [
+            "--input_file", f"gs://gharchive_bucket_endless-context-344913/{GCS_PATH_TEMPLATE}",
+            "--general_activity", f"{DATASET_NAME}.general_activity",
+            "--active_users", f"{DATASET_NAME}.active_users"
+        ]
     )
 
     download_task >> upload_task >> delete_task >> processing_task

@@ -64,6 +64,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
+    - /home/toluwani/dezoomcamp-project/dataproc/:/opt/airflow/dataproc
     - /home/toluwani/.google/credentials/:/.google/credentials:ro
 
   user: "${AIRFLOW_UID:-50000}:0"
