@@ -75,7 +75,7 @@ gen_activity_df.createOrReplaceTempView('gen_activity')
 
 active_users_df = spark.sql("""
 SELECT
-    day,
+    CAST (day AS DATE),
     user.id AS user_id,
     user.login AS username,
     user.avatar_url AS avatar_url,

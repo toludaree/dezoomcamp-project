@@ -40,12 +40,14 @@ resource "google_bigquery_table" "table1" {
 
   time_partitioning {
     type = "DAY"
-    field = "day"
+    field = "created_at"
   }
 
   clustering = ["event_type"]
 
   schema = file("table1_schema.json")
+
+  deletion_protection = false
 
 }
 
@@ -61,5 +63,7 @@ resource "google_bigquery_table" "table2" {
   clustering = ["username"]
 
   schema = file("table2_schema.json")
+
+  deletion_protection = false
 
 }

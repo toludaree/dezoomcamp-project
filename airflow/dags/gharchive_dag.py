@@ -52,12 +52,13 @@ default_args = {
     "retries": 1,
 }
 with DAG(
-    dag_id="gharchive-dag",
+    dag_id="gharchive_dag",
     description="Pipeline for Data Engineering Zoomcamp Project",
     default_args=default_args,
     schedule_interval="0 8 * * *",
     start_date=datetime(2022, 4, 1),
-    max_active_runs=1
+    max_active_runs=1,
+    catchup=True
 ) as dag:
 
     download_task = BashOperator(

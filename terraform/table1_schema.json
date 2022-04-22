@@ -70,7 +70,7 @@
   },
   {
     "name": "day",
-    "type": "DATE",
+    "type": "STRING",
     "mode": "NULLABLE"
   },
   {
