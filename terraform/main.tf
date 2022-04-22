@@ -33,3 +33,37 @@ resource "google_bigquery_dataset" "dataset" {
 
   delete_contents_on_destroy = true
 }
+
+resource "google_bigquery_table" "table1" {
+  dataset_id = google_bigquery_dataset.dataset.dataset_id
+  table_id   = "general_activity"
+
+  time_partitioning {
+    type = "DAY"
+    field = "created_at"
+  }
+
+  clustering = ["event_type"]
+
+  schema = file("table1_schema.json")
+
+  deletion_protection = false
+
+}
+
+resource "google_bigquery_table" "table2" {
+  dataset_id = google_bigquery_dataset.dataset.dataset_id
+  table_id   = "active_users"
+
+  time_partitioning {
+    type = "DAY"
+    field = "day"
+  }
+
+  clustering = ["username"]
+
+  schema = file("table2_schema.json")
+
+  deletion_protection = false
+
+}

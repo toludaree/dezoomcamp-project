@@ -65,6 +65,8 @@ day = F.udf(get_day)
 
 gen_activity_df = df \
     .select("created_at", "type", "actor", "repo") \
+    .withColumnRenamed('type', "event_type") \
+    .withColumnRenamed('actor', 'user') \
     .withColumn('day', day(df.created_at)) \
     .withColumn('hour', F.hour(df.created_at)) \
     .withColumn('weekday', weekday(df.created_at))
@@ -73,11 +75,11 @@ gen_activity_df.createOrReplaceTempView('gen_activity')
 
 active_users_df = spark.sql("""
 SELECT
-    day,
-    actor.id AS user_id,
-    actor.login AS username,
-    actor.avatar_url AS avatar_url,
-    type AS event_type,
+    CAST (day AS DATE),
+    user.id AS user_id,
+    user.login AS username,
+    user.avatar_url AS avatar_url,
+    event_type,
     count(1) AS count
 FROM gen_activity
 GROUP BY day, user_id, username, avatar_url, event_type
@@ -94,5 +96,3 @@ active_users_df.write.format('bigquery') \
     .mode('append') \
     .option('table', active_users) \
     .save()
-# fact_activity.repartition(4).write.parquet(fact_output)
-# active_people.coalesce(1).write.parquet(active_output)

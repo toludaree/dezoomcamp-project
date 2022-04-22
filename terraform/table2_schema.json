@@ -1,0 +1,32 @@
+[
+  {
+    "name": "day",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "user_id",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "username",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "avatar_url",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "count",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  }
+]
