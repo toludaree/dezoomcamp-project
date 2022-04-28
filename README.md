@@ -7,7 +7,7 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 
 ## Problem Statement
 - `DevTrack`, a developer-productivity company wants to create a new product for the developer community. 
-- You have been hired to give insights on developer activity on Github for April 2022.
+- You have been hired to give insights on Github developer activity for April 2022.
 - Here are some of your proposed end-goal questions:
     - On which day of the month was Github most active?
     - On which weekday is Github most active?
