@@ -97,7 +97,51 @@ Before installing packages on the VM, an SSH key has to be created to connect to
 6. Go back to your terminal and type this command in your home directory
     ```bash
     ssh -i <path-to-private-key> <USER>@<External IP>
-    ```  
+    ```
+7. This should connect you to the VM
+8. Instead of trying to remember the above command, you can create a config file in your local `~/.ssh/` directory. Here is an example below:
+    ```bash
+    Host dezp  # Can be any name of your choosing
+        HostName <External IP>
+        User <username>
+        IdentityFile <absolute-path-to-private-key>
+    ```
+    - You can now connect to your VM from your home directory by running
+        ```bash
+        ssh dezp
+        ```
+##### Google Cloud SDK
+Google Cloud SDK is already pre-installed on a GCP VM. You can confirm by running `gcloud --version`.  
+If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/install-sdk) to install it on your local machine
+##### Docker
+1. Connect to your VM
+2. Install Docker
+    ```bash
+    sudo apt-get update
+    sudo apt-get install docker.io
+    ```
+3. Docker needs to be configured so that it can run without `sudo`
+    ```bash
+    sudo groupadd docker
+    sudo gpasswd -a $USER docker
+    sudo service docker restart
+    ```
+    - Logout of your SSH session and log back in
+    - Test that docker works successfully by running `docker run hello-world`
+##### Docker-Compose
+1. Check and copy the latest release for Linux from the official Github [repository](https://github.com/docker/compose)
+2. Create a folder called `bin/` in the home directory. Navigate into the `/bin` directory and download the binary file there
+    ```bash
+    wget <copied-file> -O docker-compose
+    ```
+3. Make the file executable `chmod +x docker-compose
+4. Add the `.bin/` directory to PATH permanently
+    - Open the .bashrc file in the HOME directory `nano .bashrc`
+    - Go to the end of the file and paste this there `export PATH="${HOME}/bin:${PATH}"`
+    - Save the file `CTRL-O` and exit nano `CTRL-X`
+    - Reload the PATH variable with `source .bashrc`
+5. You should be able to run docker-compose from anywhere now. Test this with `docker-compose --version`
+##### Terraform
 
 - Google Cloud SDK
 - Docker
