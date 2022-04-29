@@ -96,8 +96,8 @@ Before installing packages on the VM, an SSH key has to be created to connect to
 5. Go to the VM instance you created and copy the External IP
 6. Go back to your terminal and type this command in your home directory
     ```bash
-ssh -i <path-to-private-key> <USER>@<External IP>
-```  
+    ssh -i <path-to-private-key> <USER>@<External IP>
+    ```  
 
 - Google Cloud SDK
 - Docker
