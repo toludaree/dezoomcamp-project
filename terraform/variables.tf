@@ -9,5 +9,4 @@ variable "project" {
 
 variable "region" {
   description = "Region for GCP resources"
-  default = "europe-west6"
 }

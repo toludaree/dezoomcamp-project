@@ -1,4 +1,4 @@
-# Data Engineering Zoomcamp Project
+    a Data Engineering Zoomcamp Project
 This is my project for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) by [DataTalks.Club](https://datatalks.club/)
 
 Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineering-zoomcamp)
@@ -142,12 +142,94 @@ If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/i
     - Reload the PATH variable with `source .bashrc`
 5. You should be able to run docker-compose from anywhere now. Test this with `docker-compose --version`
 ##### Terraform
+1. Navigate to the `bin/` directory that you created
+    ```bash
+    wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip
+    ```
+2. Unzip the file
+    ```bash
+    unzip terraform_1.1.7_linux_amd64.zip
+    ```
+    > You might have to install unzip `sudo apt-get install unzip`
+3. Remove the zip file
+    ```bash
+    rm terraform_1.1.7_linux_amd64.zip
+    ```
+4. Terraform is already installed. Test it with `terraform -v`
 
-- Google Cloud SDK
-- Docker
-- Terraform
-
+#### Google Application Credentials
+The JSON credentials downloaded is on your local machine. We would transfer it to the VM with an `SFTP` client
+1. On your local machine, navigate to the location of the credentials file `${HOME}/.google/google_credentials.json`
+2. Connect to your VM with `sftp` using the host name you created  in your config file
+    ```bash
+    sftp dezp
+    ```
+3. Once connected to your VM through sftp, create the same folder on your VM `${HOME}/.google/credentials/`
+4. Navigate to this folder and run
+    ```bash
+    put google_credentials.json
+    ```
+5. Log out of sftp and log in to your VM. Confirm that the file is there
+6. For convenience, add this line to the end of the `.bashrc` file
+    ```bash
+    export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/.google/google_credentials.json
+    ```
+    - Refresh with `source .bashrc`
+7. Use the service account credentials file for authentication
+    ```bash
+    gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+    ```
+##### Remote-SSH
+To work with folders on a remote machine on Visual Studio Code, you need this extension. This extension also simplifies the forwarding of ports.
+1. Install the Remote-SSH extension from the Extensions Marketplace
+2. At the bottom left-hand corner, click the _Open a Remote Window_ icon
+3. Click _Connect to Host_. Click the name of your config file host.
+4. In the _Explorer_ tab, open any folder on your Virtual Machine
 
 ### Main
+1. Clone my repository on your working machine
+    ```bash
+    git clone https://github.com/Isaac-Tolu/dezoomcamp-project.git
+    ```
+2. Create the remaining infrastructure: A GCS bucket and a BQ table
+    - Navigate to the `terraform/` folder
+    - Initialise terraform
+        ```bash
+        terraform init
+        ```
+    - Check infrastructure plan
+        ```bash
+        terraform plan
+        ```
+    - Create new infrastructure
+        ```bash
+        terraform apply
+        ```
+    - Confirm that the infra has been created on the GCP dashboard
+3. Run pipeline
+    - Navigate to the `airflow/` directory
+    - Create a `logs` folder
+        ```bash
+        mkdir -p logs/
+        ```
+    - Check docker-compose file for hard-coded values
+    - Build the docker image
+        ```bash
+        docker-compose build
+        ```
+    - Initialise Airflow resources
+        ```bash
+        docker-compose up airflow-init
+        ```
+    - Kick up all other services
+        ```bash
+        docker-compose up
+        ```
+    - Run `docker ps` to check if the services are healthy
+    - Forward the port `8080` to your local machine
+    - Go to `localhost:8080` and sign in
+    > Both username and pssword is airflow
+    - Run the DAG. This might te
 
 ### Dashboard
+
