@@ -20,6 +20,7 @@ spark = SparkSession.builder \
     .appName('test') \
     .getOrCreate()
 
+# Change the temporary bucket name to suit your use-case
 spark.conf.set('temporaryGcsBucket', 'dataproc-temp-europe-west6-480347133231-noyhb2ch')
 
 schema = types.StructType([

@@ -1,10 +1,9 @@
-    a Data Engineering Zoomcamp Project
+# Data Engineering Zoomcamp Project
 This is my project for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp) by [DataTalks.Club](https://datatalks.club/)
 
 Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineering-zoomcamp)
 
 ## Table of Contents
-
 ## Problem Statement
 - `DevTrack`, a developer-productivity company wants to create a new product for the developer community. 
 - You have been hired to give insights on Github developer activity for April 2022.
@@ -12,19 +11,10 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
     - On which day of the month was Github most active?
     - On which weekday is Github most active?
     - The most active day and weekday filtered by event? 
-
 ## About the Dataset
 [Github Archive](https://www.gharchive.org/) is a project to record the public Github timeline, archive it, and make it accessible for further analysis.
-
-## About the Project
-- Github Archive data is ingested daily into a Data Lake
-- The data in the Data Lake is transformed according to business requirements
-- The results are written to 2 pre-defined tables in a Data Warehouse
-- A dashboard is created from the data in the data warehouse
-
 ## Architecture
 ![architecture](./images/dezp-arc.png)
-
 ## Technologies / Tools
 - Containerisation - [Docker](https://www.docker.com/)
 - Infrastructure-as-Code (IaC) - [Terraform](https://www.terraform.io/)
@@ -34,36 +24,37 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 - Data Warehouse - [Google BigQuery](https://cloud.google.com/bigquery)
 - Batch Processing - [Google DataProc](https://cloud.google.com/dataproc) 
 - Visualisation - [Google Data Studio](https://datastudio.google.com/)
-
+## About the Project
+- Starting from April 1, Github Archive data is ingested daily into Google Cloud Storage,
+- A PySpark job is run on the data in GCS using Google DataProc,
+- The results are written to 2 pre-defined tables in Google BigQuery,
+- A dashboard is created from the BigQuery tables.
 ## Dashboard
 ![dashboard](./images/developer_activity.png)
-
 > You can interact with the live dashboard [here](https://datastudio.google.com/reporting/4f8a63db-0d37-4b2b-a037-0b00206ec612)
-
 ## Reproducibility
+
 ### Pre-Requisites
+
 #### Google Cloud Platform Account
 1. Create a [GCP](https://cloud.google.com/) account if you do not have one. Note that GCP offers $300 free credits for 90 days
-2. Create a new project from the GCP [dashboard](https://console.cloud.google.com/). Notr your project ID
-
+2. Create a new project from the GCP [dashboard](https://console.cloud.google.com/). Note your project ID
 #### Create a Service Account
 1. Go to _IAM & Admin > Service Accounts_
-2. Click `CREATE SERVICE ACCOUNT`. More information [here](https://cloud.google.com/docs/authentication/getting-started#creating_a_service_account)
+2. Click _Create Service Account_. More information [here](https://cloud.google.com/docs/authentication/getting-started#creating_a_service_account)
 3. Add the following roles to the service account:
-    - `Viewer`
-    - `Storage Admin`
-    - `Storage Object Admin`
-    - `BigQuery Admin`
-    - `DataProc Administrator`
+    - _Viewer_
+    - _Storage Admin_
+    - _Storage Object Admin_
+    - _BigQuery Admin_
+    - _DataProc Administrator_
 4. Download the private JSON keyfile. Rename it to `google_credentials.json` and store it in `${HOME}/.google/credentials/`
 5. You would need to enable this APIs if you have not done already
     - [IAM API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
     - [IAM Service Account Credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
-
 #### Pre-Infrastructure Setup
-Terraform is used to setup most of the infrastructure but the Virtual Machine and DataProc Cluster used for this project was created on the Cloud console. This aspect contain steps to setup this aspect of this project.
-
-> You can also use your local machine to reproduce this project but it is much better to use a VM so as not to strain your system. If you still choose to use your local machine, install the necessary packages on your local machine.
+Terraform is used to setup most of the infrastructure but the Virtual Machine and DataProc Cluster used for this project was created on the cloud console. This aspect contain steps to setup this aspect of this project.
+> You can also use your local machine to reproduce this project but it is much better to use a VM. If you still choose to use your local machine, install the necessary packages on your local machine.
 
 ##### Setting up a Virtual Machine on GCP
 1. On the project dashboard, go to _Compute Engine > VM Instances_
@@ -71,35 +62,34 @@ Terraform is used to setup most of the infrastructure but the Virtual Machine an
     - Use any name of your choosing
     - Choose a [region](https://cloud.google.com/about/locations) that suits you most
         > All your GCP resources should be in the same region
-    - For machine configuration, choose the E2 series. An `e2-standard-2 (2 vCPU, 8 GB memory)` or `e2-standard-4 (4 vCPU, 16 GB memory)` is sufficient for this project
-    - In the Boot disk section, change it to `Ubuntu` OS preferably `
-Ubuntu 20.04 LTS`. A disk size of 30GB is also enough.
-    - Leave all other settings on default value and click `Create`
+    - For machine configuration, choose the E2 series. An _e2-standard-2 (2 vCPU, 8 GB memory)_ is sufficient for this project
+    - In the Boot disk section, change it to _Ubuntu_ preferably _Ubuntu 20.04 LTS_. A disk size of 30GB is also enough.
+    - Leave all other settings on default value and click _Create_
 > You would need to enable the [Compute Engine API](https://console.cloud.google.com/apis/library/compute.googleapis.com) if you have not already.
-
 ##### Setting up a DataProc Cluster on GCP
 1. On the project dashboard, go to _DataProc > Clusters_
 2. Create a new cluster
-    - Use any name of your choosing, preferably `gharchive-cluster` as this is hard-coded in the docker-compose file
-    - Choose the region you have used for other GCP resources
-    - For Cluster Type, use `Standard (1 master, N workers)`
-    - Leave other options on default and click `Create`
+    - Use any name of your choosing
+    > I used **gharchive-cluster** for my project
+    - For Cluster Type, use _Standard (1 master, N workers)_
+    - Leave other options on default and click _Create_
 > You would need to enable the [Cloud Dataproc API](https://console.cloud.google.com/apis/library/dataproc.googleapis.com) if you have not already.
 
 #### Installing Required Packages on the VM
 Before installing packages on the VM, an SSH key has to be created to connect to the VM
+
 ##### SSH Key Connection
 1. To create the SSH key, check this [guide](https://cloud.google.com/compute/docs/connect/create-ssh-keys)
 2. Copy the public key in the `~/ssh` folder
 3. On the GCP dashboard, navigate to _Compute Engine > Metadata > SSH KEYS_
-4. Click `Edit`. Then click `Add Item`. Paste the public key and click `Save`
-5. Go to the VM instance you created and copy the External IP
+4. Click _Edit_. Then click _Add Item_. Paste the public key and click _Save_
+5. Go to the VM instance you created and copy the _External IP_
 6. Go back to your terminal and type this command in your home directory
     ```bash
     ssh -i <path-to-private-key> <USER>@<External IP>
     ```
-7. This should connect you to the VM
-8. Instead of trying to remember the above command, you can create a config file in your local `~/.ssh/` directory. Here is an example below:
+    - This should connect you to the VM
+7. You can also create a config file in your local `~/.ssh/` directory. This would make it easier to log in to the VM. Here is an example below:
     ```bash
     Host dezp  # Can be any name of your choosing
         HostName <External IP>
@@ -110,6 +100,10 @@ Before installing packages on the VM, an SSH key has to be created to connect to
         ```bash
         ssh dezp
         ```
+8. When you're through with using the VM, you should always shut it down. You can do this either on the GCP dashboard or on your terminal
+    ```bash
+    sudo shutdown now
+    ```
 ##### Google Cloud SDK
 Google Cloud SDK is already pre-installed on a GCP VM. You can confirm by running `gcloud --version`.  
 If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/install-sdk) to install it on your local machine
@@ -134,15 +128,27 @@ If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/i
     ```bash
     wget <copied-file> -O docker-compose
     ```
-3. Make the file executable `chmod +x docker-compose
+3. Make the file executable 
+    ```bash
+    chmod +x docker-compose
+    ```
 4. Add the `.bin/` directory to PATH permanently
-    - Open the .bashrc file in the HOME directory `nano .bashrc`
-    - Go to the end of the file and paste this there `export PATH="${HOME}/bin:${PATH}"`
-    - Save the file `CTRL-O` and exit nano `CTRL-X`
-    - Reload the PATH variable with `source .bashrc`
+    - Open the `.bashrc` file in the HOME directory
+    ```bash
+    nano .bashrc
+    ```
+    - Go to the end of the file and paste this there 
+    ```bash
+    export PATH="${HOME}/bin:${PATH}"
+    ```
+    - Save the file (_CTRL-O_) and exit nano (_CTRL-X_)
+    - Reload the PATH variable
+    ```bash
+    source .bashrc
+    ```
 5. You should be able to run docker-compose from anywhere now. Test this with `docker-compose --version`
 ##### Terraform
-1. Navigate to the `bin/` directory that you created
+1. Navigate to the `bin/` directory that you created and run this
     ```bash
     wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_amd64.zip
     ```
@@ -156,11 +162,10 @@ If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/i
     rm terraform_1.1.7_linux_amd64.zip
     ```
 4. Terraform is already installed. Test it with `terraform -v`
-
 #### Google Application Credentials
 The JSON credentials downloaded is on your local machine. We would transfer it to the VM with an `SFTP` client
 1. On your local machine, navigate to the location of the credentials file `${HOME}/.google/google_credentials.json`
-2. Connect to your VM with `sftp` using the host name you created  in your config file
+2. Connect to your VM with **SFTP** using the host name you created  in your config file
     ```bash
     sftp dezp
     ```
@@ -185,51 +190,87 @@ To work with folders on a remote machine on Visual Studio Code, you need this ex
 2. At the bottom left-hand corner, click the _Open a Remote Window_ icon
 3. Click _Connect to Host_. Click the name of your config file host.
 4. In the _Explorer_ tab, open any folder on your Virtual Machine
+Now, you can use VSCode completely to run this project.
 
 ### Main
-1. Clone my repository on your working machine
-    ```bash
+
+#### Clone the repository
+```bash
     git clone https://github.com/Isaac-Tolu/dezoomcamp-project.git
+```
+#### Create remaining infrastructure with Terraform
+We use Terraform to create a GCS bucket, a BQ table, and 2 BQ tables
+1. Navigate to the [terraform](./terraform/) folder
+2. Initialise terraform
+    ```bash
+    terraform init
     ```
-2. Create the remaining infrastructure: A GCS bucket and a BQ table
-    - Navigate to the `terraform/` folder
-    - Initialise terraform
+3. Check infrastructure plan
+    ```bash
+    terraform plan
+    ```
+4. Create new infrastructure
+    ```bash
+    terraform apply
+    ```
+5. Confirm that the infrastructure has been created on the GCP dashboard
+#### Copy PySpark file to Google Cloud Storage
+1. When creating the DataProc cluster, a temporary GCS bucket was created for that cluster. The pyspark [file](./dataproc/spark_job.py) makes use of that temporary bucket.
+    - Copy the name of the bucket from the cloud console
+        ![gcs-temp-bucket](./images/gcs-temp-bucket.jpg)
+    - Replace it in the pyspark file
+        ![spark-temp-bucket](./images/spark-temp-bucket.png)
+2. Copy file to GCS with `gsutil`
+    - On the terminal, nagivate to the `dataproc` directory
+    - Then run this command:
         ```bash
-        terraform init
+        gsutil cp spark_job.py gs://<gcs-bucket-name>/dataproc/spark_job.py
         ```
-    - Check infrastructure plan
-        ```bash
-        terraform plan
-        ```
-    - Create new infrastructure
-        ```bash
-        terraform apply
-        ```
-    - Confirm that the infra has been created on the GCP dashboard
-3. Run pipeline
-    - Navigate to the `airflow/` directory
-    - Create a `logs` folder
-        ```bash
-        mkdir -p logs/
-        ```
-    - Check docker-compose file for hard-coded values
-    - Build the docker image
-        ```bash
-        docker-compose build
-        ```
-    - Initialise Airflow resources
-        ```bash
-        docker-compose up airflow-init
-        ```
-    - Kick up all other services
-        ```bash
-        docker-compose up
-        ```
-    - Run `docker ps` to check if the services are healthy
-    - Forward the port `8080` to your local machine
-    - Go to `localhost:8080` and sign in
-    > Both username and pssword is airflow
-    - Run the DAG. This might te
+        > `gcs-bucket-name` is the name of the bucket you created with terraform
+3. Go to the cloud console and confirm that the folder is there
+#### Initialise Airflow
+Airflow is run in a docker container. This section contains steps on initisialing Airflow resources
+1. Navigate to the [airflow](./airflow/) folder
+2. Create a logs folder `airflow/logs/`
+    ```bash
+    mkdir logs/
+    ```
+3. Build the docker image
+    ```bash
+    docker-compose build
+    ```
+4. The names of some project resources are hardcoded in the [docker_compose.yaml](./airflow/docker-compose.yaml) file. Change this values to suit your use-case
+    ![hardcoded-values](./images/hardcoded-values.png)
+5. Initialise Airflow resources
+    ```bash
+    docker-compose up airflow-init
+    ```
+6. Kick up all other services
+    ```bash
+    docker-compose up
+    ```
+7. Open another terminal instance and check docker running services
+    ```bash
+    docker ps
+    ```
+    - Check if all the services are healthy
+8. Forward port **8080** from VS Code. Open `localhost:8080` on your browser and sign into airflow
+    > Both username and password is `airflow`
+#### Run the pipeline
+You are already signed into Airflow. Now it's time to run the pipeline
+1. Click on the DAG `gharchive_dag` that you see there
+2. You should see a tree-like structure of the DAG you're about to run
+    ![tree-dag](./images/dag-tree.png)
+3. You can also check the graph structure of the DAG
+    ![graph-dag](./images/dag-graph.png)
+4. At the top right-hand corner, trigger the DAG. Make sure _Auto-refresh_ is turned on before doing this
+    > The DAG would run from April 1 at 8:00am UTC till 8:00am UTC of the present day  
+    > This should take a while
+5. While this is going on, check the cloud console to confirm that everything is working accordingly
+    > If you face any problem or error, confirm that you have followed all the above instructions religiously. If the problems still persist, raise an issue.
+6. When the pipeline is finished and you've confirmed that everything went well, shut down **docker-compose* with _CTRL-C_ and kill all containers with `docker-compose down`
+7. Take a well-deserved break to rest as this has been a long ride.
 
 ### Dashboard
 
+## Notable Notes
