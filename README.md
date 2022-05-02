@@ -269,8 +269,10 @@ You are already signed into Airflow. Now it's time to run the pipeline
 5. While this is going on, check the cloud console to confirm that everything is working accordingly
     > If you face any problem or error, confirm that you have followed all the above instructions religiously. If the problems still persist, raise an issue.
 6. When the pipeline is finished and you've confirmed that everything went well, shut down **docker-compose* with _CTRL-C_ and kill all containers with `docker-compose down`
-7. Take a well-deserved break to rest as this has been a long ride.
+7. Take a well-deserved break to rest. This has been a long ride.
 
 ### Dashboard
 
+
 ## Notable Notes
+## Acknowledgements
