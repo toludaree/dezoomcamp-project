@@ -320,14 +320,27 @@ You are already signed into Airflow. Now it's time to run the pipeline
 <p align="right"><a href="#index">back to index</a></p>
 
 ### Create the Dashboard
+[Google Data Studio](https://datastudio.google.com/) was used to generate the dashboard. A dashboard in GDS is called a **report** and reports work with data sources. One data source and one report was used in the project
+
+#### Create Report from a Data Source
+1. Click _Create > Data Source_
+2. Choose BigQuery as the connector
+3. Choose your GCP project name, `gharchive_dataset`, and the `general_activity` table
+4. Click the checkbox to use `created_at` as date-range dimension. Click _Connect_
+5. Rename these dimensions:
+    - `event_type` >> `Event`
+    - `hour` >> `Hour`
+    - `user.login` >> `Username` 
+5. Change the default aggregration of `repo.id` and `user.id` to `None`
+6. Rename the report from `general_activity` to `developer_activity`
+7. Click _Create Report_
+#### Generate Charts in the Report
+1. Delete any GDS default charts
+2. Click _Add a Chart_ and choose Line Chart
 
 
 ## Notable Notes
+- Partitioning and Clustering is pre-defined on the tables in the data warehouse. You can check the definition in the main terraform [file](./terraform/main.tf)
+
 ## Acknowledgements
-
-<details>
-<summary>How do I dropdown?</summary>
-<br>
-This is how you dropdown.
-</details>
-
+I'd like to thank the organisers of this wonderful course. It has given me valuable insights into the field of Data Engineering. Also, all fellow students who took time to answer my questions on the Slack channel, thank you very much.
