@@ -37,18 +37,20 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
     - [Notable Notes](#notable-notes)
     - [Acknowledgements](#acknowledgements)
 
-
 ## Problem Statement
 - `DevTrack`, a developer-productivity company wants to create a new product for the developer community. 
 - You have been hired to give insights on Github developer activity for April 2022.
 - Here are some of your proposed end-goal questions:
     - On which day of the month was Github most active?
     - On which weekday is Github most active?
-    - The most active day and weekday filtered by event? 
+    - The most active day and weekday filtered by event?
 ## About the Dataset
 [Github Archive](https://www.gharchive.org/) is a project to record the public Github timeline, archive it, and make it accessible for further analysis.
 ## Architecture
 ![architecture](./images/dezp-arc.png)
+
+<p align="right"><a href="#index">back to index</a></p>
+
 ## Technologies/Tools
 - Containerisation - [Docker](https://www.docker.com/)
 - Infrastructure-as-Code (IaC) - [Terraform](https://www.terraform.io/)
@@ -66,6 +68,9 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 ## Dashboard
 ![dashboard](./images/developer_activity.png)
 > You can interact with the live dashboard [here](https://datastudio.google.com/reporting/4f8a63db-0d37-4b2b-a037-0b00206ec612)
+
+<p align="right"><a href="#index">back to index</a></p>
+
 ## Reproducibility
 
 ### Pre-Requisites
@@ -86,6 +91,9 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 5. You would need to enable this APIs if you have not done already
     - [IAM API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
     - [IAM Service Account Credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
+
+<p align="right"><a href="#index">back to index</a></p>
+
 #### Pre-Infrastructure Setup
 Terraform is used to setup most of the infrastructure but the Virtual Machine and DataProc Cluster used for this project was created on the cloud console. This aspect contain steps to setup this aspect of this project.
 > You can also use your local machine to reproduce this project but it is much better to use a VM. If you still choose to use your local machine, install the necessary packages on your local machine.
@@ -108,6 +116,8 @@ Terraform is used to setup most of the infrastructure but the Virtual Machine an
     - For Cluster Type, use _Standard (1 master, N workers)_
     - Leave other options on default and click _Create_
 > You would need to enable the [Cloud Dataproc API](https://console.cloud.google.com/apis/library/dataproc.googleapis.com) if you have not already.
+
+<p align="right"><a href="#index">back to index</a></p>
 
 #### Installing Required Packages on the VM
 Before installing packages on the VM, an SSH key has to be created to connect to the VM
@@ -226,6 +236,8 @@ To work with folders on a remote machine on Visual Studio Code, you need this ex
 4. In the _Explorer_ tab, open any folder on your Virtual Machine
 Now, you can use VSCode completely to run this project.
 
+<p align="right"><a href="#index">back to index</a></p>
+
 ### Main
 
 #### Clone the repository
@@ -305,8 +317,17 @@ You are already signed into Airflow. Now it's time to run the pipeline
 6. When the pipeline is finished and you've confirmed that everything went well, shut down **docker-compose* with _CTRL-C_ and kill all containers with `docker-compose down`
 7. Take a well-deserved break to rest. This has been a long ride.
 
+<p align="right"><a href="#index">back to index</a></p>
+
 ### Create the Dashboard
 
 
 ## Notable Notes
 ## Acknowledgements
+
+<details>
+<summary>How do I dropdown?</summary>
+<br>
+This is how you dropdown.
+</details>
+
