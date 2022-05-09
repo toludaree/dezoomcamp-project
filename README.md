@@ -66,7 +66,6 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 - A dashboard is created from the BigQuery tables.
 ## Dashboard
 ![dashboard](./images/developer_activity.png)
-> You can interact with the live dashboard [here](https://datastudio.google.com/reporting/4f8a63db-0d37-4b2b-a037-0b00206ec612)
 
 <p align="right"><a href="#index">back to index</a></p>
 
