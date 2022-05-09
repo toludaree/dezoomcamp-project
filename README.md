@@ -3,7 +3,41 @@ This is my project for the [Data Engineering Zoomcamp](https://github.com/DataTa
 
 Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineering-zoomcamp)
 
-## Table of Contents
+## Index
+- [Data Engineering Zoomcamp Project](#data-engineering-zoomcamp-project)
+    - [Index](#index)
+    - [Problem Statement](#problem-statement)
+    - [About the Dataset](#about-the-dataset)
+    - [Architecture](#architecture)
+    - [Technologies/Tools](#technologiestools)
+    - [About the Project](#about-the-project)
+    - [Dashboard](#dashboard)
+    - [Reproducibility](#reproducibility)
+        - [Pre-Requisites](#pre-requisites)
+            - [Google Cloud Platform Account](#google-cloud-platform-account)
+            - [Create a Service Account](#create-a-service-account)
+            - [Pre-Infrastructure Setup](#pre-infrastructure-setup)
+                - [Setting up a Virtual Machine on GCP](#setting-up-a-virtual-machine-on-gcp)
+                - [Setting up a DataProc Cluster on GCP](#setting-up-a-dataproc-cluster-on-gcp)
+            - [Installing Required Packages on the VM](#installing-required-packages-on-the-vm)
+                - [SSH Key Connection](#ssh-key-connection)
+                - [Google Cloud SDK](#google-cloud-sdk)
+                - [Docker](#docker)
+                - [Docker-Compose](#docker-compose)
+                - [Terraform](#terraform)
+                - [Google Application Credentials](#google-application-credentials)
+                - [Remote-SSH](#remote-ssh)
+        - [Main](#main)
+            - [Clone the repository](#clone-the-repository)
+            - [Create remaining infrastructure with Terraform](#create-remaining-infrastructure-with-terraform)
+            - [Copy PySpark file to Google Cloud Storage](#copy-pyspark-file-to-google-cloud-storage)
+            - [Initialise Airflow](#initialise-airflow)
+            - [Run the pipeline](#run-the-pipeline)
+        - [Create the Dashboard](#create-the-dashboard)
+    - [Notable Notes](#notable-notes)
+    - [Acknowledgements](#acknowledgements)
+
+
 ## Problem Statement
 - `DevTrack`, a developer-productivity company wants to create a new product for the developer community. 
 - You have been hired to give insights on Github developer activity for April 2022.
@@ -15,7 +49,7 @@ Check my personal repository [here](https://github.com/Isaac-Tolu/data-engineeri
 [Github Archive](https://www.gharchive.org/) is a project to record the public Github timeline, archive it, and make it accessible for further analysis.
 ## Architecture
 ![architecture](./images/dezp-arc.png)
-## Technologies / Tools
+## Technologies/Tools
 - Containerisation - [Docker](https://www.docker.com/)
 - Infrastructure-as-Code (IaC) - [Terraform](https://www.terraform.io/)
 - Cloud - [Google Cloud Platform](https://cloud.google.com/)
@@ -162,7 +196,7 @@ If you are not using a VM, check this [link](https://cloud.google.com/sdk/docs/i
     rm terraform_1.1.7_linux_amd64.zip
     ```
 4. Terraform is already installed. Test it with `terraform -v`
-#### Google Application Credentials
+##### Google Application Credentials
 The JSON credentials downloaded is on your local machine. We would transfer it to the VM with an `SFTP` client
 1. On your local machine, navigate to the location of the credentials file `${HOME}/.google/google_credentials.json`
 2. Connect to your VM with **SFTP** using the host name you created  in your config file
@@ -271,7 +305,7 @@ You are already signed into Airflow. Now it's time to run the pipeline
 6. When the pipeline is finished and you've confirmed that everything went well, shut down **docker-compose* with _CTRL-C_ and kill all containers with `docker-compose down`
 7. Take a well-deserved break to rest. This has been a long ride.
 
-### Dashboard
+### Create the Dashboard
 
 
 ## Notable Notes
